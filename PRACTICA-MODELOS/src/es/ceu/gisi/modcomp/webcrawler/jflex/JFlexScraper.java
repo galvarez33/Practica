@@ -1,5 +1,8 @@
 package es.ceu.gisi.modcomp.webcrawler.jflex;
 
+import static es.ceu.gisi.modcomp.webcrawler.jflex.lexico.Tipo.OPEN;
+import static es.ceu.gisi.modcomp.webcrawler.jflex.lexico.Tipo.PALABRA;
+import static es.ceu.gisi.modcomp.webcrawler.jflex.lexico.Tipo.SLASH;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -40,7 +43,27 @@ public class JFlexScraper {
         while ((token = analizador.nextToken()) != null) {
             System.out.print(token.getValor() + " ");
             switch (estado) {
+                
                 case 0:
+                    if (token.getTipo().equals(OPEN)) {
+                        estado = 1;
+                        }
+                case 1: 
+                   if (token.getTipo().equals(PALABRA)) {
+                        pila.push(token.getValor());
+                        //System.out.println(token.getValor());
+                        estado = 2;
+                    }
+                   
+                    if (token.getValor().toLowerCase().equals("a") && token.getTipo().equals(PALABRA)) {
+                        estado = 3;
+                        identificador = 1;
+                    }
+                    if (token.getValor().toLowerCase().equals("img") && token.getTipo().equals(PALABRA)) {
+                        estado = 4;
+                        identificador = 2;
+                    }
+                    break;
         
     }
     
