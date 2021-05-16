@@ -8,6 +8,9 @@ import java.io.Reader;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
+import es.ceu.gisi.modcomp.webcrawler.jflex.lexico.Token;
+import java.io.*;
+
 
 /**
  * Esta clase encapsula toda la lógica de interacción con el parser HTML.
@@ -28,6 +31,31 @@ public class JFlexScraper {
         Reader reader = new BufferedReader(new FileReader(fichero));
         analizador = new HTMLParser(reader);
     }
+    
+    
+    public void automata() throws IOException {
+        int id=0;
+        Token token;
+        
+        while ((token = analizador.nextToken()) != null) {
+            System.out.print(token.getValor() + " ");
+            switch (estado) {
+                case 0:
+        
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 
     // Esta clase debe contener tu automata programado...
     public ArrayList<String> obtenerHiperenlaces() {
