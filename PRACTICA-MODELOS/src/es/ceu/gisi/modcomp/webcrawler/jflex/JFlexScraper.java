@@ -100,14 +100,13 @@ public class JFlexScraper {
 
                     break;
                 case 4:
+                     if (token.getTipo().equals(IGUAL)) {
+                        estado = 4;
+                     }
                     if (token.getTipo().equals(PALABRA)) {
                         estado = 4;
-                        
-                    }
-                    if (token.getTipo().equals(IGUAL)) {
-                        estado = 4;
-                        
-                    }
+                      }
+                                      
                     if (token.getValor().toLowerCase().equals("src") && token.getTipo().equals(PALABRA)) {
                         estado = 5;
                         id = 2;
@@ -117,6 +116,29 @@ public class JFlexScraper {
                        
                     }
                     break;
+                 case 5:
+                    if (token.getTipo().equals(IGUAL)) {
+                        estado = 6;
+                       
+                    }
+                    break;
+                case 6:
+                    if (id == 1) {
+                        estado = 2;
+                        LINKS.add(token.getValor());
+                    }
+                    if (id == 2) {
+                        estado = 2;
+                        IMAGES.add(token.getValor());
+                    }
+                    break;
+                case 7:
+                    if (token.getTipo().equals(PALABRA)) {
+                        estado = 2;
+                        
+                    }
+
+            }
     
     
     
