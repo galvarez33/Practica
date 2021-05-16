@@ -57,6 +57,7 @@ public class JFlexScraper {
                        
                         estado = 2;
                     }
+                  
                    
                     if (token.getValor().toLowerCase().equals("a") && token.getTipo().equals(PALABRA)) {
                         estado = 3;
@@ -122,6 +123,7 @@ public class JFlexScraper {
                        
                     }
                     break;
+                    
                 case 6:
                     if (id == 1) {
                         estado = 2;
@@ -135,10 +137,21 @@ public class JFlexScraper {
                 case 7:
                     if (token.getTipo().equals(PALABRA)) {
                         estado = 2;
-                        
-                    }
+                        }
+                    break;
 
             }
+            }
+    }
+
+   public List<String> getLinks(){
+        return this.LINKS;
+    }
+   public List<String> getImagenes(){
+        return this.IMAGES;
+    }
+
+    
     
     
     
