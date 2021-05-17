@@ -31,10 +31,10 @@ public class JFlexScraper {
     ArrayList<String> enlacesIMG = new ArrayList();
     Stack<String> etiquetasAbiertas = new Stack();
     HTMLParser analizador; 
-    private Stack PILA = new Stack();
+    private Stack pila = new Stack();
     private List <String> IMAGES = new ArrayList();
     private List <String> LINKS = new ArrayList();
-    private boolean malBalanceado = false;
+    private boolean estaBalanceado = false;
     private int estado = 0;
     
     
@@ -42,6 +42,9 @@ public class JFlexScraper {
     public JFlexScraper(File fichero) throws FileNotFoundException,IOException {
         Reader reader = new BufferedReader(new FileReader(fichero));
         analizador = new HTMLParser(reader);
+         if (this.pila.empty()) {
+            this.estaBalanceado = true;
+        }
         
     
     
@@ -123,7 +126,7 @@ public class JFlexScraper {
                      if (token.getTipo().equals(PALABRA)) {
                         if(token.getValor().equalsIgnoreCase(etiquetasAbiertas.peek())){
                             etiquetasAbiertas.pop();
-                            malBalanceado = true;
+                            estaBalanceado = false;
                         }
                         }
                    
@@ -148,12 +151,12 @@ public class JFlexScraper {
     }
 
     public boolean getBalance() {
-        return this.malBalanceado;
+        return this.estaBalanceado;
     }
 
     public Stack getStack() {
-        return this.;
-    }
+        return this.pila;
+    }}
 
    
    
