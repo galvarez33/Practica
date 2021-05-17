@@ -5,6 +5,7 @@ import static es.ceu.gisi.modcomp.webcrawler.jflex.lexico.Tipo.IGUAL;
 import static es.ceu.gisi.modcomp.webcrawler.jflex.lexico.Tipo.OPEN;
 import static es.ceu.gisi.modcomp.webcrawler.jflex.lexico.Tipo.PALABRA;
 import static es.ceu.gisi.modcomp.webcrawler.jflex.lexico.Tipo.SLASH;
+import static es.ceu.gisi.modcomp.webcrawler.jflex.lexico.Tipo.VALOR;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -66,6 +67,9 @@ public class JFlexScraper {
                     if (token.getValor().toLowerCase().equals("img") && token.getTipo().equals(PALABRA)) {
                         estado = 4;
                         id= 2;
+                    
+                    } else if (token.getTipo().equals(SLASH)) {
+                        estado = 6;
                     }
                     break;
         
@@ -74,48 +78,39 @@ public class JFlexScraper {
                     if (token.getTipo().equals(CLOSE)) {
                         
                         estado = 0;
-                    } else if (token.getTipo().equals(SLASH)) {
-                        estado = 2;
-                        
-                       
+                    }
+                    if(token.getTipo().equals(PALABRA)){
+                        estado = 3;
+                    }
+                     if (token.getValor().toLowerCase().equals("href") && token.getTipo().equals(PALABRA)) {
+                        estado = 3;
+                        id = 2;
+                    }
+                     if (token.getValor().toLowerCase().equals("src") && token.getTipo().equals(PALABRA)) {
+                        estado = 3;
+                        id = 2;
+                    }
+                    
+                    
+                    else if (token.getTipo().equals(SLASH)) {
+                        estado = 5;
+                                              
                     }
                     break;
                     
                 case 3:
-                    if (token.getTipo().equals(PALABRA)) {
-                        estado = 3;
-                       
-                    }
+                    
                     if (token.getTipo().equals(IGUAL)) {
                         estado = 3;
                         
                     }
-                    if (token.getValor().toLowerCase().equals("href") && token.getTipo().equals(PALABRA)) {
-                        estado = 5;
-                        id = 1;
-                    }
-                    if (token.getValor().equals(CLOSE)) {
-                        estado = 0;
-                     
-                    }
-
+                   
                     break;
                 case 4:
-                     if (token.getTipo().equals(IGUAL)) {
-                        estado = 4;
-                     }
-                    if (token.getTipo().equals(PALABRA)) {
-                        estado = 4;
-                      }
-                                      
-                    if (token.getValor().toLowerCase().equals("src") && token.getTipo().equals(PALABRA)) {
+                     if(token.getTipo().equals(VALOR)){
                         estado = 5;
-                        id = 2;
-                    }
-                    if (token.getValor().equals(CLOSE)) {
-                        estado = 0;
-                       
-                    }
+                     }
+                    
                     break;
                  case 5:
                     if (token.getTipo().equals(IGUAL)) {
