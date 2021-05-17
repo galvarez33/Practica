@@ -37,10 +37,12 @@ public class JFlexScraper {
     private boolean malBalanceado = false;
     private int estado = 0;
     
+    
 
     public JFlexScraper(File fichero) throws FileNotFoundException,IOException {
         Reader reader = new BufferedReader(new FileReader(fichero));
         analizador = new HTMLParser(reader);
+        
     
     
     
@@ -136,12 +138,25 @@ public class JFlexScraper {
             }}
     
 
-   public List<String> getLinks(){
-        return this.LINKS;
+    //DEVOLUCION DE LOS DISTINTOS VALORES
+    public List<String> getImagenes() {
+        return this.enlacesIMG;
     }
-   public List<String> getImagenes(){
-        return this.IMAGES;
+
+    public List<String> getLinks() {
+        return this.enlacesA;
     }
+
+    public boolean getBalance() {
+        return this.malBalanceado;
+    }
+
+    public Stack getStack() {
+        return this.;
+    }
+
+   
+   
 
 
    
@@ -156,9 +171,9 @@ public class JFlexScraper {
         // Habrá que programarlo..
         return new ArrayList<String>();
     }
-*/
+
     public boolean esDocumentoHTMLBienBalanceado() {
         // Habrá que programarlo..
         return malBalanceado;
     
-}}
+}}*/
