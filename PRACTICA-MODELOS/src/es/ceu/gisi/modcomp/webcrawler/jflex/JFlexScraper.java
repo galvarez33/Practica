@@ -128,7 +128,7 @@ public class JFlexScraper {
                             etiquetasAbiertas.pop();
                             estaBalanceado = false;
                         }
-                        }
+                        }// FALTA CHEQUEAR LO DE LA PILA
                    
                     break;
                 case 7:
