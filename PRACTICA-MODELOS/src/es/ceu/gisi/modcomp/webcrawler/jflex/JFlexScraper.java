@@ -1,5 +1,6 @@
 package es.ceu.gisi.modcomp.webcrawler.jflex;
 
+import es.ceu.gisi.modcomp.webcrawler.jflex.lexico.Tipo;
 import static es.ceu.gisi.modcomp.webcrawler.jflex.lexico.Tipo.CLOSE;
 import static es.ceu.gisi.modcomp.webcrawler.jflex.lexico.Tipo.IGUAL;
 import static es.ceu.gisi.modcomp.webcrawler.jflex.lexico.Tipo.OPEN;
@@ -25,6 +26,10 @@ import java.io.*;
  */
 
 public class JFlexScraper {
+    
+    ArrayList<String> enlacesA = new ArrayList();
+    ArrayList<String> enlacesIMG = new ArrayList();
+    Stack<String> etiquetasAbiertas = new Stack();
     HTMLParser analizador; 
     private Stack PILA = new Stack();
     private List <String> IMAGES = new ArrayList();
@@ -57,7 +62,8 @@ public class JFlexScraper {
                     }
                 case 1: 
                    if (token.getTipo().equals(PALABRA)) {                                          
-                        estado = 2;   
+                        estado = 2; 
+                        etiquetasAbiertas.push(token.getValor().toLowerCase());
                                 
                         if (token.getValor().toLowerCase().equals("a") ) {
                             etiquetaA =true;
@@ -89,14 +95,18 @@ public class JFlexScraper {
                 case 3:
                     
                     if (token.getTipo().equals(IGUAL)) {
-                        estado = 3;
-                        
-                    }
-                   
+                        estado = 4;         
+                    }                  
                     break;
+                    
                 case 4:
-                     if(token.getTipo().equals(VALOR)){
-                        estado = 2;
+                    if(token.getTipo() == Tipo.VALOR){
+                      if (valorHREF){
+                          enlacesA.add(token.getValor());
+                      }
+                      if (valorIMG){
+                          enlacesIMG.add(token.getValor());
+                      }
                      }
                     
                     break;
