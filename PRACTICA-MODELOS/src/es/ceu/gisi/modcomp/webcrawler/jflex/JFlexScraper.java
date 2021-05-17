@@ -34,18 +34,18 @@ public class JFlexScraper {
     private Stack PILA = new Stack();
     private List <String> IMAGES = new ArrayList();
     private List <String> LINKS = new ArrayList();
-    private boolean isBalanced = false;
+    private boolean malBalanceado = false;
     private int estado = 0;
     
 
-    public JFlexScraper(File fichero) throws FileNotFoundException {
+    public JFlexScraper(File fichero) throws FileNotFoundException,IOException {
         Reader reader = new BufferedReader(new FileReader(fichero));
         analizador = new HTMLParser(reader);
     
     
     
-    public void automata() throws IOException {
-        int id=0;
+    //public void automata() throws IOException {
+        
         Token token;
         boolean etiquetaA=false;
         boolean etiquetaIMG=false;
@@ -119,26 +119,22 @@ public class JFlexScraper {
                     
                 case 6:
                      if (token.getTipo().equals(PALABRA)) {
-                        estado = 2;
+                        if(token.getValor().equalsIgnoreCase(etiquetasAbiertas.peek())){
+                            etiquetasAbiertas.pop();
+                            malBalanceado = true;
                         }
-                    if (id == 1) {
-                        estado = 2;
-                        LINKS.add(token.getValor());
-                    }
-                    if (id == 2) {
-                        estado = 2;
-                        IMAGES.add(token.getValor());
-                    }
+                        }
+                   
                     break;
                 case 7:
-                    if (token.getTipo().equals(PALABRA)) {
-                        estado = 2;
+                    if (token.getTipo().equals(CLOSE)) {
+                        estado = 0;
                         }
                     break;
 
             }
-            }
-    }
+            }}
+    
 
    public List<String> getLinks(){
         return this.LINKS;
@@ -147,23 +143,11 @@ public class JFlexScraper {
         return this.IMAGES;
     }
 
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+
+   
 
     // Esta clase debe contener tu automata programado...
-    public ArrayList<String> obtenerHiperenlaces() {
+   /* public ArrayList<String> obtenerHiperenlaces() {
         // Habrá que programarlo..
         return new ArrayList<String>();
     }
@@ -172,9 +156,9 @@ public class JFlexScraper {
         // Habrá que programarlo..
         return new ArrayList<String>();
     }
-
+*/
     public boolean esDocumentoHTMLBienBalanceado() {
         // Habrá que programarlo..
-        return false;
-    }
-}
+        return malBalanceado;
+    
+}}
