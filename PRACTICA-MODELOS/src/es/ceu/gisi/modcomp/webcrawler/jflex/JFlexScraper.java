@@ -36,15 +36,18 @@ public class JFlexScraper {
     public JFlexScraper(File fichero) throws FileNotFoundException {
         Reader reader = new BufferedReader(new FileReader(fichero));
         analizador = new HTMLParser(reader);
-    }
+    
     
     
     public void automata() throws IOException {
         int id=0;
         Token token;
-        
+        boolean etiquetaA=false;
+        boolean etiquetaIMG=false;
+        boolean valorHREF=false;
+        boolean valorIMG=false;
         while ((token = analizador.nextToken()) != null) {
-            System.out.print(token.getValor() + " ");
+            //System.out.print(token.getValor() + " ");
             switch (estado) {
                 
                 case 0:
@@ -53,51 +56,36 @@ public class JFlexScraper {
                        break;
                     }
                 case 1: 
-                   if (token.getTipo().equals(PALABRA)) {
-                        PILA.push(token.getValor());
-                       
-                        estado = 2;
+                   if (token.getTipo().equals(PALABRA)) {                                          
+                        estado = 2;   
+                                
+                        if (token.getValor().toLowerCase().equals("a") ) {
+                            etiquetaA =true;
                     }
-                  
-                   
-                    if (token.getValor().toLowerCase().equals("a") && token.getTipo().equals(PALABRA)) {
-                        estado = 3;
-                        id = 1;
-                    }
-                    if (token.getValor().toLowerCase().equals("img") && token.getTipo().equals(PALABRA)) {
-                        estado = 4;
-                        id= 2;
                     
-                    } else if (token.getTipo().equals(SLASH)) {
+                        else if (token.getValor().toLowerCase().equals("img")) {
+                            etiquetaIMG=true;
+                    
+                    } }
+                   else if (token.getTipo().equals(SLASH)) {
                         estado = 6;
                     }
                     break;
         
                     
                     case 2:
-                    if (token.getTipo().equals(CLOSE)) {
-                        
-                        estado = 0;
-                    }
-                    if(token.getTipo().equals(PALABRA)){
-                        estado = 3;
-                    }
-                     if (token.getValor().toLowerCase().equals("href") && token.getTipo().equals(PALABRA)) {
-                        estado = 3;
-                        id = 2;
-                    }
-                     if (token.getValor().toLowerCase().equals("src") && token.getTipo().equals(PALABRA)) {
-                        estado = 3;
-                        id = 2;
-                    }
-                    
-                    
-                    else if (token.getTipo().equals(SLASH)) {
-                        estado = 5;
-                                              
-                    }
-                    break;
-                    
+                        if(token.getTipo().equals(PALABRA)){
+                            estado =3;
+                            if(etiquetaA){
+                                if(token.getValor().equalsIgnoreCase("href")){
+                              valorHREF= true;
+                            }       
+                            else if(etiquetaIMG){
+                                if(token.getValor().equalsIgnoreCase("src")){
+                                    valorIMG =true;
+                                }
+                                    }}}
+                        break;
                 case 3:
                     
                     if (token.getTipo().equals(IGUAL)) {
@@ -108,18 +96,21 @@ public class JFlexScraper {
                     break;
                 case 4:
                      if(token.getTipo().equals(VALOR)){
-                        estado = 5;
+                        estado = 2;
                      }
                     
                     break;
                  case 5:
-                    if (token.getTipo().equals(IGUAL)) {
-                        estado = 6;
+                    if (token.getTipo().equals(CLOSE)) {
+                        estado = 0;
                        
                     }
                     break;
                     
                 case 6:
+                     if (token.getTipo().equals(PALABRA)) {
+                        estado = 2;
+                        }
                     if (id == 1) {
                         estado = 2;
                         LINKS.add(token.getValor());
