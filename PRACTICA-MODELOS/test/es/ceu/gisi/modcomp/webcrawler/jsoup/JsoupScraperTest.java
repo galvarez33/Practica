@@ -50,9 +50,14 @@ public class JsoupScraperTest {
     List<String> hiperenlaces = new ArrayList<String>();
 
 
- @Test
+    @Test
     public void obtenerHiperenlaces() {
         this.hiperenlaces.add("http://www.bbc.co.uk");
         assertEquals(scraper.obtenerHiperenlaces(), hiperenlaces);
     }
+    @Test
+    public void etiqueta(){
+        assertEquals(scraper.etiqueta("a"),1){
+    }}
+}
     
