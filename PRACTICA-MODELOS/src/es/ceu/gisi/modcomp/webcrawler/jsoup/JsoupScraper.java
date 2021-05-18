@@ -68,7 +68,7 @@ public class JsoupScraper {
      */
     public List<String> obtenerHiperenlaces() {
         List<String> enlaces = new ArrayList<String>();
-        Elements links = doc.select("a");
+        Elements links = doc.getElementsByTag("a");
         for (Element e : links) {
             enlaces.add(e.attr("href"));
         }
@@ -82,10 +82,11 @@ public class JsoupScraper {
      */
     public List<String> obtenerHiperenlacesImagenes() {
         List<String> enlaces = new ArrayList<String>();
-        Elements elementos = doc.select("IMG");
+        Elements elementos = doc.getElementsByTag("IMG");
         for (Element e : elementos) {
             enlaces.add(e.attr("src"));
         }
+       
         return enlaces;
     }
 
@@ -97,7 +98,7 @@ public class JsoupScraper {
      *         HTML.
      */
     public String obtenerContenidoImg() {
-        Element elemento = doc.select("IMG").first();
+        Element elemento = doc.getElementsByTag("IMG").first();
         String imagen = elemento.attr("src");
         return imagen;
     }
