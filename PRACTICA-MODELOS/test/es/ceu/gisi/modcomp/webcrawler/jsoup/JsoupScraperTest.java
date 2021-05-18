@@ -48,4 +48,11 @@ public class JsoupScraperTest {
         assertEquals(scraper.obtenerContenidoImg(), "brushedsteel.jpg");
     }
     List<String> hiperenlaces = new ArrayList<String>();
-}
+
+
+ @Test
+    public void obtenerHiperenlaces() {
+        this.hiperenlaces.add("http://www.bbc.co.uk");
+        assertEquals(scraper.obtenerHiperenlaces(), hiperenlaces);
+    }
+    
