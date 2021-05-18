@@ -56,8 +56,9 @@ public class JsoupScraperTest {
         assertEquals(scraper.obtenerHiperenlaces(), hiperenlaces);
     }
     @Test
-    public void etiqueta(){
-        assertEquals(scraper.etiqueta("a"),1){
-    }}
+    public void estadisticasEtiqueta(){
+        assertEquals(scraper.estadisticasEtiqueta("a"),1);   
+    }
 }
+
     
