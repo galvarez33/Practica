@@ -33,7 +33,7 @@ public class JsoupScraper {
     public JsoupScraper(URL url) throws IOException {
         // La variable deberá inicializarse de alguna manera utilizando una URL...
         // De momento, se inicializa a null para que compile...
-        doc = null;
+        doc = Jsoup.connect(url.toString()).get();;
     }
 
     /**
