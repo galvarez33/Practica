@@ -54,9 +54,12 @@ public class JsoupScraper {
      * @return El número de etiquetas de ese tipo que hay en el documento HTML
      */
     public int estadisticasEtiqueta(String etiqueta) {
-        // Habrá que programarlo..
-        return 0;
+        
+        Elements estadisticas = doc.select(etiqueta);
+        return estadisticas.size();
     }
+        
+    
 
     /**
      * Obtiene todos los hiperenlaces que se encuentran en el documento creado.
