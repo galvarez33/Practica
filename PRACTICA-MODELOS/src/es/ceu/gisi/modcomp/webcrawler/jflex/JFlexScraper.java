@@ -57,7 +57,7 @@ public class JFlexScraper {
         boolean valorHREF=false;
         boolean valorIMG=false;
         while ((token = analizador.nextToken()) != null) {
-            //System.out.print(token.getValor() + " ");
+            System.out.print(token.getValor() + " ");
             switch (estado) {
                 
                 case 0:
@@ -96,6 +96,10 @@ public class JFlexScraper {
                                     valorIMG =true;
                                 }
                                     }}}
+                        if (token.getTipo().equals(SLASH)) {
+                        estado = 5;
+                    }
+                        
                         break;
                 case 3:
                     
@@ -107,10 +111,14 @@ public class JFlexScraper {
                 case 4:
                     if(token.getTipo() == Tipo.VALOR){
                       if (valorHREF){
-                          enlacesA.add(token.getValor());
+                           estado=2;
+                           enlacesA.add(token.getValor());
+                         
                       }
                       if (valorIMG){
+                          estado=2;
                           enlacesIMG.add(token.getValor());
+                            
                       }
                      }
                     
@@ -127,6 +135,8 @@ public class JFlexScraper {
                         if(token.getValor().equalsIgnoreCase(etiquetasAbiertas.peek())){
                             etiquetasAbiertas.pop();
                             estaBalanceado = false;
+                        estado=7;                            
+             
                         }
                         }// FALTA CHEQUEAR LO DE LA PILA
                    
