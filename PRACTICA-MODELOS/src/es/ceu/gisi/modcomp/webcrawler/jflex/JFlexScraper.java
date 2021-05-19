@@ -100,6 +100,10 @@ public class JFlexScraper {
                         if (token.getTipo().equals(SLASH)) {
                         estado = 5;
                     }
+                        if (token.getTipo().equals(CLOSE)) {
+                        estado = 0;
+                    }
+                        
                         
                         break;
                 case 3:
