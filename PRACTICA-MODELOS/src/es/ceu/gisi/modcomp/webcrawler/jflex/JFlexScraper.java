@@ -32,8 +32,8 @@ public class JFlexScraper {
     Stack<String> etiquetasAbiertas = new Stack();
     HTMLParser analizador; 
     private Stack pila = new Stack();
-    private List <String> IMAGES = new ArrayList();
-    private List <String> LINKS = new ArrayList();
+   // private List <String> IMG = new ArrayList();
+    //private List <String> LINKS = new ArrayList();
     private boolean estaBalanceado = false;
     private int estado = 0;
     
@@ -42,6 +42,7 @@ public class JFlexScraper {
     public JFlexScraper(File fichero) throws FileNotFoundException,IOException {
         Reader reader = new BufferedReader(new FileReader(fichero));
         analizador = new HTMLParser(reader);
+        
          if (this.pila.empty()) {
             this.estaBalanceado = true;
         }
@@ -166,16 +167,16 @@ public class JFlexScraper {
 
     public Stack getStack() {
         return this.pila;
-    }}
+    }
 
    
    
 
 
    
-
+/*
     // Esta clase debe contener tu automata programado...
-   /* public ArrayList<String> obtenerHiperenlaces() {
+    public ArrayList<String> obtenerHiperenlaces() {
         // Habrá que programarlo..
         return new ArrayList<String>();
     }
@@ -184,9 +185,9 @@ public class JFlexScraper {
         // Habrá que programarlo..
         return new ArrayList<String>();
     }
-
+*/
     public boolean esDocumentoHTMLBienBalanceado() {
         // Habrá que programarlo..
-        return malBalanceado;
+        return !(estaBalanceado && etiquetasAbiertas.empty());
     
-}}*/
+}}
