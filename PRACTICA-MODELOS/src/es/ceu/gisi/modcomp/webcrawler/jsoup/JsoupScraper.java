@@ -47,6 +47,8 @@ public class JsoupScraper {
     public JsoupScraper(String html) throws IOException {
         doc = Jsoup.parse(html);
     }
+    String imagen;
+    List<String> enlaces = new ArrayList<String>();
 
     /**
      * Realiza estadísticas sobre el número de etiquetas de un cierto tipo.
@@ -66,8 +68,6 @@ public class JsoupScraper {
      *
      * @return Una lista con todas las URLs de los hiperenlaces
      */
-    List<String> enlaces = new ArrayList<String>();
-
     public List<String> obtenerHiperenlaces() {
 
         Elements links = doc.getElementsByTag("a");
@@ -100,14 +100,16 @@ public class JsoupScraper {
      * @return El nombre (o ruta) de la primera imagen insertada en el documento
      * HTML.
      */
-    String imagen;
-
     public String obtenerContenidoImg() {
         Element elemento = doc.getElementsByTag("IMG").first();
         imagen = elemento.attr("src");
         return imagen;
     }
 
+    /**
+     * Metodo para llevar la salida a un fichero.txt como se indica en la
+     * memoria
+     */
     public void VolcarFichero() {
         FileWriter fichero = null;
         PrintWriter pw = null;

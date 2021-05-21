@@ -169,6 +169,8 @@ public class JFlexScraper {
 
     /**
      * Devuelve los enlaces de las imagenes
+     *
+     * @return enlacesIMG
      */
     public List<String> getImagenes() {
         return this.enlacesIMG;
@@ -176,6 +178,8 @@ public class JFlexScraper {
 
     /**
      * Devuleve los hiperenlaces
+     *
+     * @return enlacesA
      */
     public List<String> getLinks() {
         return this.enlacesA;
@@ -184,6 +188,8 @@ public class JFlexScraper {
     /**
      * Si no se ha quedado ninguna etiqueta sin cerrar, el documento está
      * balanaceado
+     *
+     * @return estaBalanceado
      */
     public boolean getBalance() {
         return this.estaBalanceado;
@@ -191,6 +197,8 @@ public class JFlexScraper {
 
     /**
      * Muestra contenido de la pila
+     *
+     * @return pila
      */
     public Stack getStack() {
         return this.pila;
