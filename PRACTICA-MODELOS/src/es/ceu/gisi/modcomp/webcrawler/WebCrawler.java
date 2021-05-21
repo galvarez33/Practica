@@ -34,12 +34,13 @@ public class WebCrawler {
                 "la pila queda: " + a.getStack());
         System.out.println(
                 "isBalanced?: " + a.getBalance());
+        a.VolcarFicheroJFLEX();
         // Deberá inicializar JsoupScraper con la DIRECCIÓN HTTP de una página
         // web a analizar. Creará un fichero con todos los hiperenlaces que
         // encuentre en la página web. También obtendrá estadísticas de uso
         // de las etiquetas HTML más comunes: a, br, div, li, ul, p, span, table, td, tr
         JsoupScraper j = new JsoupScraper(new URL("https://elpais.com/"));
-        System.out.println(j.obtenerContenidoImg());
+
         System.out.println(j.estadisticasEtiqueta("a"));
         System.out.println(j.estadisticasEtiqueta("br"));
         System.out.println(j.estadisticasEtiqueta("div"));
@@ -50,7 +51,10 @@ public class WebCrawler {
         System.out.println(j.estadisticasEtiqueta("table"));
         System.out.println(j.estadisticasEtiqueta("td"));
         System.out.println(j.estadisticasEtiqueta("tr"));
+        System.out.println(j.obtenerContenidoImg());
         System.out.println(j.obtenerHiperenlaces());
         System.out.println(j.obtenerHiperenlacesImagenes());
+        j.VolcarFichero();
+
     }
 }
