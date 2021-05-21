@@ -14,7 +14,10 @@ import java.util.Stack;
 /**
  * Esta clase encapsula toda la lógica de interacción con el parser HTML.
  *
- * @author Sergio Saugar García <sergio.saugargarcia@ceu.es>
+ *
+ * @author Gonzalo Álvarez Moreno
+ *
+ *
  */
 public class JFlexScraper {
 
@@ -23,16 +26,20 @@ public class JFlexScraper {
     Stack<String> etiquetasAbiertas = new Stack();
     HTMLParser analizador;
     private Stack pila = new Stack();
-    // private List <String> IMG = new ArrayList();
-    //private List <String> LINKS = new ArrayList();
     private boolean estaBalanceado = true;
     private int estado = 0;
 
+    /**
+     * Constructor encargado de la apertura y lectura del fichero asi como la
+     * definicion de las diferentes variables
+     *
+     * @param fichero
+     * @throws java.io.FileNotFoundException
+     */
     public JFlexScraper(File fichero) throws FileNotFoundException, IOException {
         Reader reader = new BufferedReader(new FileReader(fichero));
         analizador = new HTMLParser(reader);
 
-        //public void automata() throws IOException {
         Token token;
         boolean etiquetaA = false;
         boolean etiquetaIMG = false;
@@ -156,46 +163,43 @@ public class JFlexScraper {
                     break;
 
             }
-            // System.out.println("ESTADO " + estado);
 
         }
     }
 
-    //DEVOLUCION DE LOS DISTINTOS VALORES
+    /**
+     * Devuelve los enlaces de las imagenes
+     */
     public List<String> getImagenes() {
         return this.enlacesIMG;
     }
 
+    /**
+     * Devuleve los hiperenlaces
+     */
     public List<String> getLinks() {
         return this.enlacesA;
     }
 
+    /**
+     * Si no se ha quedado ninguna etiqueta sin cerrar, el documento está
+     * balanaceado
+     */
     public boolean getBalance() {
         return this.estaBalanceado;
     }
 
+    /**
+     * Muestra contenido de la pila
+     */
     public Stack getStack() {
         return this.pila;
     }
 
-    /*
-    // Esta clase debe contener tu automata programado...
-    public ArrayList<String> obtenerHiperenlaces() {
-        // Habrá que programarlo..
-        return new ArrayList<String>();
-    }
-
-    public ArrayList<String> obtenerHiperenlacesImagenes() {
-        // Habrá que programarlo..
-        return new ArrayList<String>();
-    }
+    /**
+     * Método encargado de volcar los resultados obtenidos al fichero
+     * SalidaJFLEX en el mismo paquete
      */
-    public boolean esDocumentoHTMLBienBalanceado() {
-        // Habrá que programarlo..
-        return !(estaBalanceado && etiquetasAbiertas.empty());
-
-    }
-
     public void VolcarFicheroJFLEX() {
         FileWriter fichero1 = null;
         PrintWriter pr = null;
