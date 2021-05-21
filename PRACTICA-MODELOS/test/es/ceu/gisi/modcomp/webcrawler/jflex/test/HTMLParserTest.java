@@ -127,11 +127,27 @@ public class HTMLParserTest {
             assertTrue(false);
         }
     }
+
     @Test
     public void compruebaFichero1() throws IOException, FileNotFoundException {
 
-         JFlexScraper a;
+        JFlexScraper a;
         a = new JFlexScraper(ficheroPrueba1);
+        assertEquals(a.getImagenes().size(), 2);
+        assertEquals(a.getLinks().size(), 3);
+        assertEquals(a.getBalance(), true);
+        System.out.println("img: : " + a.getImagenes());
+        System.out.println("links: " + a.getLinks());
+        System.out.println("la pila queda: " + a.getStack());
+        System.out.println("isBalanced?: " + a.getBalance());
+
+    }
+
+    @Test
+    public void compruebaFichero2() throws IOException, FileNotFoundException {
+
+        JFlexScraper a;
+        a = new JFlexScraper(ficheroPrueba2);
         assertEquals(a.getImagenes().size(), 2);
         assertEquals(a.getLinks().size(), 3);
         assertEquals(a.getBalance(), true);
