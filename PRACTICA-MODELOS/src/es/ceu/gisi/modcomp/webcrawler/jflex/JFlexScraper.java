@@ -33,7 +33,7 @@ public class JFlexScraper {
      * Constructor encargado de la apertura y lectura del fichero asi como la
      * definicion de las diferentes variables
      *
-     * @param fichero
+     * @param fichero creacion del fichero
      * @throws java.io.FileNotFoundException
      */
     public JFlexScraper(File fichero) throws FileNotFoundException, IOException {

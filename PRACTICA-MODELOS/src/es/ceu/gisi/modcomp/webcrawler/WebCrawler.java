@@ -10,10 +10,14 @@ import java.net.URL;
  * Esta aplicación contiene el programa principal que ejecuta ambas partes del
  * proyecto de programación.
  *
- * @author Sergio Saugar García <sergio.saugargarcia@ceu.es>
+ * @author Gonzalo Álvarez Moreno
  */
 public class WebCrawler {
 
+    /**
+     * Constructor encargado de generar las rutas de los diferentes ficheros
+     * para analizar html
+     */
     private final static String PATH_PRUEBAS = new java.io.File("").getAbsolutePath()
             + "/test/es/ceu/gisi/modcomp/webcrawler/jflex/test/";
     private static File ficheroPrueba1 = new File(PATH_PRUEBAS + "prueba1.html");
@@ -41,16 +45,16 @@ public class WebCrawler {
         // de las etiquetas HTML más comunes: a, br, div, li, ul, p, span, table, td, tr
         JsoupScraper j = new JsoupScraper(new URL("https://elpais.com/"));
 
-        System.out.println(j.estadisticasEtiqueta("a"));
-        System.out.println(j.estadisticasEtiqueta("br"));
-        System.out.println(j.estadisticasEtiqueta("div"));
-        System.out.println(j.estadisticasEtiqueta("li"));
-        System.out.println(j.estadisticasEtiqueta("ul"));
-        System.out.println(j.estadisticasEtiqueta("p"));
-        System.out.println(j.estadisticasEtiqueta("span"));
-        System.out.println(j.estadisticasEtiqueta("table"));
-        System.out.println(j.estadisticasEtiqueta("td"));
-        System.out.println(j.estadisticasEtiqueta("tr"));
+        System.out.println("Uso de etiquetas HTML de 'a' : " + j.estadisticasEtiqueta("a"));
+        System.out.println("Uso de etiquetas HTML de 'br' : " + j.estadisticasEtiqueta("br"));
+        System.out.println("Uso de etiquetas HTML de 'div' : " + j.estadisticasEtiqueta("div"));
+        System.out.println("Uso de etiquetas HTML de 'li' : " + j.estadisticasEtiqueta("li"));
+        System.out.println("Uso de etiquetas HTML de 'ul' : " + j.estadisticasEtiqueta("ul"));
+        System.out.println("Uso de etiquetas HTML de 'p' : " + j.estadisticasEtiqueta("p"));
+        System.out.println("Uso de etiquetas HTML de 'apn' : " + j.estadisticasEtiqueta("span"));
+        System.out.println("Uso de etiquetas HTML de 'table' : " + j.estadisticasEtiqueta("table"));
+        System.out.println("Uso de etiquetas HTML de 'td' : " + j.estadisticasEtiqueta("td"));
+        System.out.println("Uso de etiquetas HTML de 'tr' : " + j.estadisticasEtiqueta("tr"));
         System.out.println(j.obtenerContenidoImg());
         System.out.println(j.obtenerHiperenlaces());
         System.out.println(j.obtenerHiperenlacesImagenes());
