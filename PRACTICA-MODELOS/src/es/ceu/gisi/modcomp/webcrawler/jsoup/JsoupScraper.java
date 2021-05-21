@@ -5,7 +5,9 @@
  */
 package es.ceu.gisi.modcomp.webcrawler.jsoup;
 
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -28,7 +30,7 @@ public class JsoupScraper {
      * analizar.
      *
      * @param url Una URL que apunte a un documento HTML (p.e.
-     *            http://www.servidor.com/index.html)
+     * http://www.servidor.com/index.html)
      */
     public JsoupScraper(URL url) throws IOException {
         // La variable deberá inicializarse de alguna manera utilizando una URL...
@@ -54,20 +56,20 @@ public class JsoupScraper {
      * @return El número de etiquetas de ese tipo que hay en el documento HTML
      */
     public int estadisticasEtiqueta(String etiqueta) {
-        
+
         Elements estadisticas = doc.select(etiqueta);
         return estadisticas.size();
     }
-        
-    
 
     /**
      * Obtiene todos los hiperenlaces que se encuentran en el documento creado.
      *
      * @return Una lista con todas las URLs de los hiperenlaces
      */
+    List<String> enlaces = new ArrayList<String>();
+
     public List<String> obtenerHiperenlaces() {
-        List<String> enlaces = new ArrayList<String>();
+
         Elements links = doc.getElementsByTag("a");
         for (Element e : links) {
             enlaces.add(e.attr("href"));
@@ -80,13 +82,14 @@ public class JsoupScraper {
      *
      * @return Una lista con todas las URLs de los hiperenlaces
      */
+    //List<String> enlaces = new ArrayList<String>();
     public List<String> obtenerHiperenlacesImagenes() {
-        List<String> enlaces = new ArrayList<String>();
+        //List<String> enlaces = new ArrayList<String>();
         Elements elementos = doc.getElementsByTag("IMG");
         for (Element e : elementos) {
             enlaces.add(e.attr("src"));
         }
-       
+
         return enlaces;
     }
 
@@ -95,11 +98,30 @@ public class JsoupScraper {
      * encontramos.
      *
      * @return El nombre (o ruta) de la primera imagen insertada en el documento
-     *         HTML.
+     * HTML.
      */
     public String obtenerContenidoImg() {
         Element elemento = doc.getElementsByTag("IMG").first();
         String imagen = elemento.attr("src");
         return imagen;
+    }
+
+    public void VolcarFichero() {
+        FileWriter fichero = null;
+        PrintWriter pw = null;
+        try {
+            fichero = new FileWriter("./SalidaJSOUP.txt");
+            pw = new PrintWriter(fichero);
+            pw.println("ENLACES: " + "\n" + enlaces + "\n");
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (null != fichero);
+                fichero.close();
+            } catch (IOException e2) {
+                e2.printStackTrace();
+            }
+        }
     }
 }
