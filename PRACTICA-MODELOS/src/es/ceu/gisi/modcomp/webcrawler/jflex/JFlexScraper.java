@@ -39,7 +39,7 @@ public class JFlexScraper {
         boolean valorHREF = false;
         boolean valorIMG = false;
         while ((token = analizador.nextToken()) != null) {
-            // System.out.print(token.getValor() + " ");
+            System.out.print(token.getValor() + " ");
             switch (estado) {
 
                 case 0:
@@ -137,15 +137,16 @@ public class JFlexScraper {
 
                 case 6:
                     if (token.getTipo().equals(PALABRA)) {
-                        System.out.println("PILA " + etiquetasAbiertas + " Palabra " + token.getValor() + "tocho :" + !token.getValor().equalsIgnoreCase(etiquetasAbiertas.peek()) + " Etiquets: " + etiquetasAbiertas.peek());
+                        // System.out.println("PILA " + etiquetasAbiertas + " Palabra " + token.getValor() + "tocho :" + !token.getValor().equalsIgnoreCase(etiquetasAbiertas.peek()) + " Etiquets: " + etiquetasAbiertas.peek());
+                        // System.out.println("\tEstado: " + estado + "\tToken: " + token.getTipo());
                         if (!token.getValor().equalsIgnoreCase(etiquetasAbiertas.pop())) {
 
                             estaBalanceado = false;
 
                         }
                         estado = 7;
-                        System.out.println("PILA " + etiquetasAbiertas + " Palabra " + token.getValor() + " balanceado " + estaBalanceado);
-                    }// FALTA CHEQUEAR LO DE LA PILA
+                        //    System.out.println("PILA " + etiquetasAbiertas + " Palabra " + token.getValor() + " balanceado " + estaBalanceado);
+                    }
 
                     break;
                 case 7:
@@ -193,5 +194,24 @@ public class JFlexScraper {
         // Habrá que programarlo..
         return !(estaBalanceado && etiquetasAbiertas.empty());
 
+    }
+
+    public void VolcarFicheroJFLEX() {
+        FileWriter fichero1 = null;
+        PrintWriter pr = null;
+        try {
+            fichero1 = new FileWriter("./src/es/ceu/gisi/modcomp/webcrawler/SalidaJFLEX.txt");
+            pr = new PrintWriter(fichero1);
+            pr.println("ENLACES: " + "\n\t\t" + getImagenes() + "\n" + "ENLACES IMAGENES: \n\t\t" + getLinks() + "\n");
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (null != fichero1);
+                fichero1.close();
+            } catch (IOException e2) {
+                e2.printStackTrace();
+            }
+        }
     }
 }
