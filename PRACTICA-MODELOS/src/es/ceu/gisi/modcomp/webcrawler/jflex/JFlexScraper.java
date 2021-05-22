@@ -23,9 +23,8 @@ public class JFlexScraper {
 
     ArrayList<String> enlacesA = new ArrayList();
     ArrayList<String> enlacesIMG = new ArrayList();
-    Stack<String> etiquetasAbiertas = new Stack();
     HTMLParser analizador;
-    private Stack pila = new Stack();
+    Stack<String> etiquetasAbiertas = new Stack();
     private boolean estaBalanceado = true;
     private int estado = 0;
 
@@ -201,7 +200,7 @@ public class JFlexScraper {
      * @return pila
      */
     public Stack getStack() {
-        return this.pila;
+        return this.etiquetasAbiertas;
     }
 
     /**
