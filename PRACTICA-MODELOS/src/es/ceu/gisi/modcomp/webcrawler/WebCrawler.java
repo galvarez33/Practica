@@ -29,7 +29,7 @@ public class WebCrawler {
         // También deberá indicar, mediante un mensaje en pantalla que
         // el fichero HTML que se ha pasado está bien balanceado.
         JFlexScraper a = new JFlexScraper(ficheroPrueba2);
-
+        System.out.println("----------------PARTE DE JFLEX-----------------");
         System.out.println(
                 "\nimg: : " + a.getImagenes());
         System.out.println(
@@ -44,7 +44,7 @@ public class WebCrawler {
         // encuentre en la página web. También obtendrá estadísticas de uso
         // de las etiquetas HTML más comunes: a, br, div, li, ul, p, span, table, td, tr
         JsoupScraper j = new JsoupScraper(new URL("https://elpais.com/"));
-
+        System.out.println("----------------PARTE DE JSOUP-----------------");
         System.out.println("Uso de etiquetas HTML de 'a' : " + j.estadisticasEtiqueta("a"));
         System.out.println("Uso de etiquetas HTML de 'br' : " + j.estadisticasEtiqueta("br"));
         System.out.println("Uso de etiquetas HTML de 'div' : " + j.estadisticasEtiqueta("div"));
