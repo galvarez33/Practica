@@ -116,7 +116,8 @@ public class JsoupScraper {
         try {
             fichero = new FileWriter("./src/es/ceu/gisi/modcomp/webcrawler/SalidaJSOUP.txt");
             pw = new PrintWriter(fichero);
-            pw.println("ENLACES: " + "\n\t\t" + enlaces + "\n" + "ENLACES IMAGENES: \n\t\t" + enlaces2 + "\n" + "CONTENIDO IMAGEN: \n\t\t" + imagen + "\n");
+            pw.println("ENLACES: " + "\n\t\t" + enlaces + "\n" + "ENLACES IMAGENES: \n\t\t" + enlaces2
+                    + "\n" + "CONTENIDO IMAGEN: \n\t\t" + imagen + "\n");
         } catch (IOException e) {
         } finally {
             try {
