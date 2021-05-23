@@ -208,13 +208,11 @@ public class JFlexScraper {
             pr = new PrintWriter(fichero1);
             pr.println("ENLACES: " + "\n\t\t" + getImagenes() + "\n" + "ENLACES IMAGENES: \n\t\t" + getLinks() + "\n");
         } catch (IOException e) {
-            e.printStackTrace();
         } finally {
             try {
                 if (null != fichero1);
                 fichero1.close();
             } catch (IOException e2) {
-                e2.printStackTrace();
             }
         }
     }

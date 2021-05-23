@@ -40,6 +40,7 @@ public class HTMLParserTest {
             reader1 = new BufferedReader(new FileReader(ficheroPrueba1));
             reader2 = new BufferedReader(new FileReader(ficheroPrueba2));
             analizador = new HTMLParser(reader1);
+
         } catch (FileNotFoundException fnfe) {
             System.out.println("No se pudo abrir alguno de los ficheros");
             fnfe.printStackTrace(System.out);
@@ -123,6 +124,7 @@ public class HTMLParserTest {
                     }
                 }
             }
+
         } catch (IOException ex) {
             Logger.getLogger(HTMLParserTest.class.getName()).log(Level.SEVERE, null, ex);
             assertTrue(false);

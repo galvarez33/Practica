@@ -31,11 +31,12 @@ public class JsoupScraper {
      *
      * @param url Una URL que apunte a un documento HTML (p.e.
      * http://www.servidor.com/index.html)
+     * @throws java.io.IOException
      */
     public JsoupScraper(URL url) throws IOException {
         // La variable deberá inicializarse de alguna manera utilizando una URL...
-        // De momento, se inicializa a null para que compile...
-        doc = Jsoup.connect(url.toString()).get();;
+
+        doc = Jsoup.connect(url.toString()).get();
     }
 
     /**
@@ -43,12 +44,14 @@ public class JsoupScraper {
      * que se pasa como parámetro.
      *
      * @param html Un documento HTML contenido en un String.
+     * @throws java.io.IOException
      */
     public JsoupScraper(String html) throws IOException {
         doc = Jsoup.parse(html);
     }
     String imagen;
     List<String> enlaces = new ArrayList<String>();
+    List<String> enlaces2 = new ArrayList<String>();
 
     /**
      * Realiza estadísticas sobre el número de etiquetas de un cierto tipo.
@@ -58,7 +61,6 @@ public class JsoupScraper {
      * @return El número de etiquetas de ese tipo que hay en el documento HTML
      */
     public int estadisticasEtiqueta(String etiqueta) {
-
         Elements estadisticas = doc.select(etiqueta);
         return estadisticas.size();
     }
@@ -82,15 +84,12 @@ public class JsoupScraper {
      *
      * @return Una lista con todas las URLs de los hiperenlaces
      */
-    //List<String> enlaces = new ArrayList<String>();
     public List<String> obtenerHiperenlacesImagenes() {
-        //List<String> enlaces = new ArrayList<String>();
         Elements elementos = doc.getElementsByTag("IMG");
         for (Element e : elementos) {
-            enlaces.add(e.attr("src"));
+            enlaces2.add(e.attr("src"));
         }
-
-        return enlaces;
+        return enlaces2;
     }
 
     /**
@@ -111,20 +110,19 @@ public class JsoupScraper {
      * memoria
      */
     public void VolcarFichero() {
-        FileWriter fichero = null;
+        FileWriter fichero;
+        fichero = null;
         PrintWriter pw = null;
         try {
             fichero = new FileWriter("./src/es/ceu/gisi/modcomp/webcrawler/SalidaJSOUP.txt");
             pw = new PrintWriter(fichero);
-            pw.println("ENLACES: " + "\n\t\t" + enlaces + "\n" + "ENLACES IMAGENES: \n\t\t" + imagen + "\n");
+            pw.println("ENLACES: " + "\n\t\t" + enlaces + "\n" + "ENLACES IMAGENES: \n\t\t" + enlaces2 + "\n" + "CONTENIDO IMAGEN: \n\t\t" + imagen + "\n");
         } catch (IOException e) {
-            e.printStackTrace();
         } finally {
             try {
                 if (null != fichero);
                 fichero.close();
             } catch (IOException e2) {
-                e2.printStackTrace();
             }
         }
     }
