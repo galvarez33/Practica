@@ -65,10 +65,6 @@ public class HTMLParserTest {
         }
     }
 
-    /**
-     * El test comprueba que el analizador léxico reconoce los tres primeros
-     * tokens de un fichero HTML y que corresponden con "<HTML>".
-     */
     @Test
     public void compruebaInicioYFinEtiquetaHTML() {
         try {
@@ -77,11 +73,12 @@ public class HTMLParserTest {
             Token token1 = analizador.nextToken();
             Token token2 = analizador.nextToken();
             Token token3 = analizador.nextToken();
+
             assertEquals(token1.getTipo(), Tipo.OPEN);
             assertEquals(token2.getValor().toLowerCase(), "html");
             assertEquals(token3.getTipo(), Tipo.CLOSE);
 
-            // El final de una etiqueta HTML es: </NOMBREETIQUETA>
+            //El final de una etiqueta HTML es: </NOMBREETIQUETA>
             Token token4 = analizador.nextToken();
             Token token5 = analizador.nextToken();
             Token token6 = analizador.nextToken();
@@ -96,6 +93,10 @@ public class HTMLParserTest {
         }
     }
 
+    /**
+     * El test comprueba que el analizador léxico reconoce los tres primeros
+     * tokens de un fichero HTML y que corresponden con "HTML".
+     */
     /**
      * El test comprueba que existe una etiqueta BR y que es una etiqueta sin
      * contenido, que se abren y cierran en una misma sentencia: <BR/>
@@ -133,8 +134,8 @@ public class HTMLParserTest {
 
         JFlexScraper a;
         a = new JFlexScraper(ficheroPrueba1);
-        assertEquals(a.getImagenes().size(), 2);
-        assertEquals(a.getLinks().size(), 3);
+        assertEquals(a.getImagenes().size(), 0);
+        assertEquals(a.getLinks().size(), 0);
         assertEquals(a.getBalance(), true);
         System.out.println("img: : " + a.getImagenes());
         System.out.println("links: " + a.getLinks());
@@ -148,8 +149,8 @@ public class HTMLParserTest {
 
         JFlexScraper a;
         a = new JFlexScraper(ficheroPrueba2);
-        assertEquals(a.getImagenes().size(), 2);
-        assertEquals(a.getLinks().size(), 3);
+        assertEquals(a.getImagenes().size(), 1);
+        assertEquals(a.getLinks().size(), 2);
         assertEquals(a.getBalance(), true);
         System.out.println("img: : " + a.getImagenes());
         System.out.println("links: " + a.getLinks());
