@@ -18,7 +18,7 @@ import org.junit.Test;
 /**
  * Clase que testea y muestra el uso del analizador léxico creado con JFlex.
  *
- * @author Sergio Saugar García <sergio.saugargarcia@ceu.es>
+ * @author Sergio Saugar García
  */
 public class HTMLParserTest {
 
